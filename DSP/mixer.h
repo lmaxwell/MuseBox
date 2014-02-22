@@ -5,7 +5,7 @@
 #include "splitter.h"
 #include "const.h"
 #include <QVector>
-#include "stereoep.h"
+#include "StereoEP.h"
 #include <QObject>
 //Stereo mixer.
 

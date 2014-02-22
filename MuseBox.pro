@@ -29,6 +29,7 @@ QT += opengl
 # CONFIG += qt-components
 
 # The .cpp file which was generated for your project. Feel free to hack it.
+win32{
 SOURCES += main.cpp \
     hardware.cpp \
     RtAudio.cpp \
@@ -58,7 +59,34 @@ SOURCES += main.cpp \
     DSP/transpose.cpp \
     newprojectdialog.cpp \
     exportaudiodialog.cpp
-
+}
+unix{
+SOURCES += main.cpp \
+    hardware.cpp \
+    RtAudio.cpp \
+    audioconfigurationdialog.cpp \
+    DSP/endpoint.cpp \
+    DSP/devicetuple.cpp \
+    DSP/device.cpp \
+    DSP/audiointerface.cpp \
+    DSP/pattern.cpp \
+    DSP/track.cpp \
+    DSP/mixer.cpp \
+    DSP/mixerchannel.cpp \
+    DSP/splitter.cpp \
+    musebox.cpp \
+    DataModel/trackmodel.cpp \
+    trackarrangementbackground.cpp \
+    cursorruler.cpp \
+    DataModel/patternmodel.cpp \
+    DataModel/messagebus.cpp \
+    patterndisplay.cpp \
+    DataModel/notemodel.cpp \
+    patternnotedisplay.cpp \
+    DSP/transpose.cpp \
+    newprojectdialog.cpp \
+    exportaudiodialog.cpp
+}
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
 qtcAddDeployment()
@@ -70,6 +98,10 @@ win32:LIBS += -lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshe
 #For a MSVC compiler, uncomment the following line:
 #win32:LIBS += kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib
 
+unix:DEFINES+= __LINUX_ALSA__
+unix:LIBS+= -lasound -lpthread
+
+win32{
 HEADERS += \
     hardware.h \
     RtError.h \
@@ -110,13 +142,45 @@ HEADERS += \
     DSP/transpose.h \
     newprojectdialog.h \
     exportaudiodialog.h
-
+}
+unix{
+HEADERS += \
+    hardware.h \
+    RtError.h \
+    RtAudio.h \
+    audioconfigurationdialog.h \
+    DSP/endpoint.h \
+    DSP/devicetuple.h \
+    DSP/device.h \
+    DSP/audiointerface.h \
+    DSP/pattern.h \
+    DSP/track.h \
+    DSP/mixer.h \
+    DSP/mixerchannel.h \
+    DSP/splitter.h \
+    DSP/const.h \
+    DSP/stereoep.h \
+    DSP/patternnote.h \
+    musebox.h \
+    DataModel/trackmodel.h \
+    trackarrangementbackground.h \
+    cursorruler.h \
+    DataModel/patternmodel.h \
+    DataModel/pointerconverter.h \
+    DataModel/messagebus.h \
+    patterndisplay.h \
+    DataModel/notemodel.h \
+    patternnotedisplay.h \
+    DSP/transpose.h \
+    newprojectdialog.h \
+    exportaudiodialog.h
+}
 FORMS += \
     audioconfigurationdialog.ui \
     newprojectdialog.ui \
     exportaudiodialog.ui
 
 win32: LIBS += -L$$PWD/libsndfile/ -llibsndfile-1
-
+unix:LIBS += -lsndfile
 INCLUDEPATH += $$PWD/libsndfile
 DEPENDPATH += $$PWD/libsndfile

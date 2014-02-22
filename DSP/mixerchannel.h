@@ -2,7 +2,7 @@
 #define MIXERCHANNEL_H
 #include "device.h"
 #include "const.h"
-#include "stereoep.h"
+#include "StereoEP.h"
 //A stereo mixer channel
 class MixerChannel : public Device
 {
